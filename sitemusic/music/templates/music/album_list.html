@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<h1>Список доступных альбомов:</h1>
+<ul>
+    <li>
+        {% for album in albums %}
+        {% if album.image %}
+        <p><img src="{{ artist.image.url }}"></p>
+        {% endif %}
+        <h2>{{ album.title }}</h2>
+        <h3>Исполнитель:<a href="{% url 'artist' album.artist_id %}"> {{ album.artist }}</a></h3>
+        <a href="{% url 'album' album.pk %}">Подробнее</a>
+        <hr>
+        {% endfor %}
+    </li>
+</ul>
+
+{% endblock %}

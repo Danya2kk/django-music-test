@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<h1>Список доступных артистов:</h1>
+<ul>
+    <li>
+        {% for artist in artists %} 
+        {% if artist.image %}
+        <p><img src="{{ artist.image.url }} " width="300px" height="300px"></p>
+        {% endif %}
+        <h5>{{  artist.name }}</h5>
+        <p>{{ artist.bio|truncatewords:20 }}</p>
+        <a href="{% url 'artist' artist.pk %}">Читать</a>
+        <hr>
+        {% endfor %}
+    </li>
+</ul>
+
+{% endblock %}

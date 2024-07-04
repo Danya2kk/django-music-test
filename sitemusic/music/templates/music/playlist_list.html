@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<h2>Плейлисты</h2>
+<ul>
+    {% for playlist in playlists %}
+        <li>
+            <h5>{{ playlist.name }}</h5>
+            <a href="{% url 'playlist_detail' playlist.pk %}">Просмотреть</a>
+        </li>
+    {% endfor %}
+</ul>
+<div>
+    <a href="{% url 'playlist_create' %}">Создать новый плейлист</a>
+</div>
+{% endblock %}

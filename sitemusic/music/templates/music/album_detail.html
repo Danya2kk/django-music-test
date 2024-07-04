@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if album.cover_image %}
+        <p><img src="{{ album.cover_image.url }}" width="300px" height="300px"></p>
+        {% endif %}
+        <h2>{{  album.title }}</h2>
+        <p>Исполнитель: {{ album.artist}}</p>
+        <p>Жанр: {{ album.genre}}</p>
+        <p>Дата релиза: {{ album.release_date}}</p>
+
+        {% if albumsongs %}
+        <h3>Список песен из альбома:</h3>
+        <ul>
+                <li>
+                        {% for song in albumsongs %}
+                                <h2>Название: {{ song.title }}</h2>
+                                <audio controls>
+                                        <source src="{{ song.file.url }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                </audio>
+                        {% endfor %}
+                </li>
+        </ul>
+        {% else %}
+                <h3>У данного альбома на данный момент нет треков</h3>
+                <h4>Чтобы добавить песню перейдите в раздел <a href="{% url 'add_song' %}">добавить песню</a></h4>
+        {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<div>
+    <h2>Вы уверены что хотите удалить плейлист "{{ playlist.name }}"?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+        <a href="{% url 'playlist_detail' playlist.pk %}">Отмена</a>
+    </form>
+</div>
+
+{% endblock %}

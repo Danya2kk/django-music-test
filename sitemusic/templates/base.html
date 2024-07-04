@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Music Portal{% endblock %}</title>
+</head>
+<body>
+
+<a href="{% url 'home' %}">Главная</a>
+    {% if user.is_authenticated  %}
+    {% for m in auth_menu %}
+    {% if not forloop.last %}<li>{% else %}<li class="last">{% endif%}
+        <a href="{% url m.url_name %}">{{ m.title }}</a>
+    </li>
+    {% endfor %}
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+    {% else %}
+    {% for m in menu %}
+    {% if not forloop.last %}<li>{% else %}<li class="last">{% endif%}
+        <a href="{% url m.url_name %}">{{ m.title }}</a>
+    </li>
+    {% endfor %}
+
+    <li>
+        <a href="{% url 'login' %}">Login</a>
+    </li>
+    <li>
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+    </li>
+    {% endif %}
+    <div>
+        {% block content %}
+
+        {% endblock %}
+    </div>
+
+</body>
+</html>

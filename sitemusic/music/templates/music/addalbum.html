@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Добавление альбома</h1>
+    <h2>WARNING!!! Если нужного исполнителя нет перейдите на страницу <a href="{% url 'add_artist' %}">добавить артиста</a></h2>
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% for f in form %}
+  <p><label for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</p>
+    <div>{{ f.errors }}</div>
+    {% endfor %}
+    <p><button type="submit">Отправить</button> </p>
+</form>
+{% endblock %}

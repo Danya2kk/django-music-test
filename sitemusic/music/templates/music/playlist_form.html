@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<div>
+    <h2>{{ form.instance.pk|yesno:"Редактировать плейлист,Создать плейлист" }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div>
+            <label for="id_name">Name</label>
+            {{ form.name }}
+        </div>
+        <div>
+            <label for="id_songs">Песни</label>
+            {{ form.songs }}
+        </div>
+        <button type="submit">{{ form.instance.pk|yesno:"Сохранить,Создать" }}</button>
+    </form>
+</div>
+{% endblock %}

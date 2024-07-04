@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <h1 class="mt-4">Дабро пожаловать на музыкальный портал {% if user.is_authenticated %}, {{ user.username }}!{% endif %}</h1>
+  <p>Типо мини spotify)))</p>
+  <h2>{{ title }}</h2>
+  <ul>
+      <li>
+      {% for song in songs %}
+        <h2>Название: {{ song.title }}</h2>
+        <p>Исполнитель: <a href="{% url 'artist' song.artist_id %}">{{ song.artist }}</a></p>
+        {% if song.album_id %}
+        <p>Альбом: <a href="{% url 'album' song.album_id %}">{{ song.album }}</a></p>
+        {% endif %}
+        <audio  loop="loop"  controls>
+          <source src="{{ song.file.url }}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        
+        {% if not forloop.last %}
+          <hr>
+        {% endif %}
+      {% endfor %}
+      </li>
+  </ul>
+
+
+{% endblock %}
